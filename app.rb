@@ -41,8 +41,9 @@ patch('/surveys/:id') do |id|
   redirect to("/surveys/#{id}")
 end
 
-delete('/surveys/:id') do
-
+delete('/surveys/:id') do |id|
+  Survey.find(id.to_i).destroy()
+  redirect to("/surveys")
 end
 
 #QUESTIONS

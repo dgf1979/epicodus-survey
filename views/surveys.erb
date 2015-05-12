@@ -19,7 +19,7 @@
           <td class="primary">
             <a href="/surveys/<%= survey.id() %>"><%= survey.title() %></a>
           </td>
-          <td class="secondary">
+          <td>
             <form action="/surveys/<%= survey.id() %>" method='post'>
               <input name="_method" type="hidden" value="delete">
               <button type="submit">Delete</button>

@@ -24,4 +24,14 @@ describe('Survey Integration', { :type => :feature }) do
       expect(page).to have_content('Job Satisfaction')
     end
   end
+
+  describe('Survey Designer - Delete Survey') do
+    it('allows a user to delete a survey') do
+      survey = Survey.create(title: "Only survey")
+      visit("/surveys")
+      click_button('Delete')
+      expect(page).to_not have_content("Only survey")
+    end
+  end
+
 end
