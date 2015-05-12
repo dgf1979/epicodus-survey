@@ -21,14 +21,51 @@ end
 
 #SURVEY
 get('/surveys') do
+  @surveys = Survey.all
   erb(:surveys)
 end
 
-get('/surveys/add') do
-  erb(:survey_add_form)
-end
-
-post('/surveys/add') do
-  
+post('/surveys') do
+  Survey.create(title: params["title"])
   redirect to('/surveys')
 end
+
+get('/surveys/:id') do |id|
+  @survey = Survey.find(id.to_i)
+  erb(:survey)
+end
+
+patch('/surveys/:id') do |id|
+  @survey = Survey.find(id.to_i)
+  @survey.update(title: params['title'])
+  redirect to("/surveys/#{id}")
+end
+
+delete('/surveys/:id') do
+
+end
+
+#QUESTIONS
+get('/surveys/:survey_id/questions') do
+  erb(:questions)
+end
+
+post('/surveys/:survey_id/questions') do |survey_id|
+  survey_id = survey_id.to_i
+  redirect to("surveys/#{survey_id}")
+end
+
+get('/surveys/:survey_id/questions/:id') do |survey_id, id|
+
+end
+
+patch('/surveys/:survey_id/questions/:id') do |survey_id, id|
+
+end
+
+delete('/surveys/:survey_id/questions/:id') do |survey_id, id|
+
+end
+
+
+#RESPONSES
