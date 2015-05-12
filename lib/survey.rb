@@ -1,4 +1,5 @@
 class Survey < ActiveRecord::Base
+  has_many(:questions)
   before_save(:title_case)
 
   private
