@@ -1,0 +1,29 @@
+<h1 class="page-header text-center">Questions</h1>
+
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <table class="table">
+    <% @questions.each() do |question| %>
+      <tr>
+        <td class="primary">
+          <%= question.text() %>
+
+          <% question.responses.each do |response| %>
+            <tr>
+              <td class="indent">
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios">
+                    <%= response.text %>
+                  </label>
+                </div>
+            </td>
+            </tr>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  </div>
+</div>
+<!-- <a href="collect/surveys/<%= @question.id + 1 %>">Next question ></a> -->

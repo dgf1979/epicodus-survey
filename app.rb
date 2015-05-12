@@ -110,3 +110,15 @@ post('/surveys/:survey_id/questions/:question_id/responses') do |survey_id, ques
     erb(:errors)
   end
 end
+
+# Collect Survey Responses
+get('/collect/surveys') do
+  @surveys = Survey.all
+  erb(:collect_surveys)
+end
+
+get('/collect/surveys/:id') do
+  @survey = Survey.find(params["id"].to_i)
+  @questions = @survey.questions
+  erb(:collect_survey)
+end

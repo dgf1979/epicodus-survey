@@ -9,3 +9,7 @@
 .secondary {
   width: 15%;
 }
+
+.indent {
+  padding-left: 30px !important;
+}
