@@ -32,6 +32,7 @@ end
 
 get('/surveys/:id') do |id|
   @survey = Survey.find(id.to_i)
+  @questions = @survey.questions
   erb(:survey)
 end
 
@@ -52,7 +53,8 @@ get('/surveys/:survey_id/questions') do
 end
 
 post('/surveys/:survey_id/questions') do |survey_id|
-  survey_id = survey_id.to_i
+  survey = Survey.find(survey_id.to_i)
+  survey.questions.create(text: params["question_text"])
   redirect to("surveys/#{survey_id}")
 end
 
@@ -65,7 +67,8 @@ patch('/surveys/:survey_id/questions/:id') do |survey_id, id|
 end
 
 delete('/surveys/:survey_id/questions/:id') do |survey_id, id|
-
+  Survey.find(survey_id.to_i).questions.find(id.to_i).destroy()
+  redirect to("/surveys/#{survey_id}")
 end
 
 

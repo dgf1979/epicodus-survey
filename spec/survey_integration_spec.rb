@@ -34,4 +34,23 @@ describe('Survey Integration', { :type => :feature }) do
     end
   end
 
+  describe('Survey Designer - Add Question') do
+    it('allows a user to add a question to a survey') do
+      survey = Survey.create(title: "Whatever")
+      visit("/surveys/#{survey.id}")
+      fill_in('question_text', :with => 'Do you like whatever?')
+      click_button('Add')
+      expect(page).to have_content('Do you like whatever?')
+    end
+
+    it('allows a user to delete a question for a survey') do
+      survey = Survey.create(title: "Whatever survey title")
+      survey.questions.create(text: "Whatever question title")
+      visit("/surveys/#{survey.id}")
+      click_button('Delete')
+      expect(page).to have_content('Whatever survey title')
+      expect(page).to_not have_content('Whatever question title')
+    end
+  end
+
 end
