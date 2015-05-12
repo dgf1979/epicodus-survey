@@ -1,6 +1,7 @@
 class Survey < ActiveRecord::Base
   has_many(:questions)
   before_save(:title_case)
+  validates_presence_of(:title)
 
   private
 

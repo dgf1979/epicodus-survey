@@ -1,10 +1,13 @@
 ENV['RACK_ENV'] = 'test'
 
-require('sinatra/activerecord')
 require('rspec')
 require('pg')
 require('pry')
-require('./lib/survey')
+require('sinatra/activerecord')
+require('survey')
+
+db_options = {adapter: 'postgresql', database: 'survey_test'}
+ActiveRecord::Base.establish_connection(db_options)
 
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 

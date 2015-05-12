@@ -20,7 +20,7 @@ describe('Survey Integration', { :type => :feature }) do
       survey = Survey.create(title: "User Satisfaction")
       visit("/surveys/#{survey.id}")
       fill_in('title', :with => 'Job Satisfaction')
-      click_button('Submit')
+      click_button('Update')
       expect(page).to have_content('Job Satisfaction')
     end
   end
@@ -34,23 +34,18 @@ describe('Survey Integration', { :type => :feature }) do
     end
   end
 
-  describe('Survey Designer - Add Question') do
-    it('allows a user to add a question to a survey') do
-      survey = Survey.create(title: "Whatever")
-      visit("/surveys/#{survey.id}")
-      fill_in('question_text', :with => 'Do you like whatever?')
+  describe('Input Validation Checks') do
+    it('redirects to error page if required add new question input is empty') do
+      visit('/surveys')
       click_button('Add')
-      expect(page).to have_content('Do you like whatever?')
+      expect(page).to have_content('Oops there were some errors')
     end
 
-    it('allows a user to delete a question for a survey') do
-      survey = Survey.create(title: "Whatever survey title")
-      survey.questions.create(text: "Whatever question title")
+    it('redirects to error page if rename survey is empty') do
+      survey = Survey.create(title: "Only survey")
       visit("/surveys/#{survey.id}")
-      click_button('Delete')
-      expect(page).to have_content('Whatever survey title')
-      expect(page).to_not have_content('Whatever question title')
+      click_button('Update')
+      expect(page).to have_content('Oops there were some errors')
     end
   end
-
 end

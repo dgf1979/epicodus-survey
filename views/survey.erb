@@ -10,7 +10,7 @@
       <div class="form-group">
         <input name='title' type='text' class="form-control">
       </div>
-      <button name='submit_type' value='rename' type='submit' class="btn btn-primary">Submit</button>
+      <button name='submit_type' value='rename' type='submit' class="btn btn-primary">Update</button>
     </form>
 
     <form action="/surveys/<%= @survey.id %>/questions" method="post">
@@ -18,7 +18,7 @@
       <h4>Add a new question:</h4>
 
       <div class="form-group">
-        <input name="question_text" class="form-control" required autofocus>
+        <input name="question_text" class="form-control">
       </div>
       <button type="submit" class="btn btn-primary">Add</button>
     </form>

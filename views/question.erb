@@ -1,0 +1,47 @@
+<h1 class="page-header text-center"><%= @question.text %></h1>
+
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h4>Change Question:</h4>
+
+    <form action='/surveys/<%= @survey.id %>/questions/<%= @question.id %>' method='post'>
+      <input type='hidden' name='_method' value='patch'>
+      <div class="form-group">
+        <input name='text' type='text' class="form-control" value='<%= @question.text%>'>
+      </div>
+      <button type='submit' class="btn btn-primary">Update</button>
+    </form>
+
+    <form action="/surveys/<%= @survey.id %>/questions/<%= @question.id %>/responses" method="post">
+
+      <h4>Add a Response to the question:</h4>
+
+      <div class="form-group">
+        <input name="response_text" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+
+    <div class="push-down">
+      <h4>Possible Responses:</h4>
+
+      <table class="table">
+      <% @responses.each() do |response| %>
+        <tr>
+          <td class="primary">
+            <%= response.text %>
+          </td>
+          <td>
+            <form action="/surveys/<%= @survey.id() %>/questions/<%= @question.id %>/responses/<%= response.id %>" method='post'>
+              <input type='hidden' name='_method' value='delete'>
+              <button type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    </div>
+  </div>
+
+  </div>
+</div>
