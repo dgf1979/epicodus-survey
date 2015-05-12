@@ -5,6 +5,6 @@ class Survey < ActiveRecord::Base
   private
 
   define_method(:title_case) do
-    self.title = title.capitalize
+    self.title = title[0].upcase + title[1..-1]
   end
 end
